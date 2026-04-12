@@ -1,0 +1,51 @@
+name: Sync kubectl-audit manifest
+
+# Index tracks only the latest kubectl-audit release (plugins/audit.yaml).
+# Manual runs: enable "Allow GitHub Actions" + open Actions → this workflow → "Run workflow".
+# No push trigger: the job commits to main under plugins/; that push would fire again (waste / concurrency noise).
+
+run-name: Sync audit (${{ github.event_name }})
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Weekly; increase frequency if you want faster picks of new releases
+    - cron: "17 6 * * 1"
+
+concurrency:
+  group: sync-kubectl-audit
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch latest release manifest
+        env:
+          MANIFEST_URL: https://github.com/codenio/kubectl-audit/releases/latest/download/audit-release.yaml
+        run: |
+          set -euo pipefail
+          curl -fsSL -o /tmp/audit-release.yaml "$MANIFEST_URL"
+
+      - name: Apply if changed
+        run: |
+          set -euo pipefail
+          if cmp -s /tmp/audit-release.yaml plugins/audit.yaml; then
+            echo "plugins/audit.yaml already matches kubectl-audit latest release."
+            exit 0
+          fi
+          cp /tmp/audit-release.yaml plugins/audit.yaml
+          version="$(grep -m1 -E '^  version:' plugins/audit.yaml | sed 's/^  version:[[:space:]]*//' | tr -d '"')"
+          if [[ -z "${version}" ]]; then
+            echo "Could not parse spec.version from manifest" >&2
+            exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add plugins/audit.yaml
+          git commit -m "chore: sync audit plugin to ${version}"
+          git push
