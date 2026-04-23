@@ -3,14 +3,14 @@ kind: Plugin
 metadata:
   name: audit
 spec:
-  version: v0.4.0
+  version: v0.5.0
   platforms:
     - selector:
         matchLabels:
           os: linux
           arch: amd64
-      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.4.0/audit_linux_amd64.tar.gz
-      sha256: "16f798fe1c1e558f3299797f23db72199d4fdcc9f5ca61dc63dc0bd01114e3dc"
+      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.5.0/audit_linux_amd64.tar.gz
+      sha256: "02954fba2d0259bd735a7865a21d7ae2606064e4aad4baa89400082f937a0d36"
       files:
         - from: audit
           to: .
@@ -21,8 +21,8 @@ spec:
         matchLabels:
           os: linux
           arch: arm64
-      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.4.0/audit_linux_arm64.tar.gz
-      sha256: "cf9989a9fc3ffa1f91ff79fe97c40a2b11a95bec243b5f4e6a0a8681ab05885c"
+      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.5.0/audit_linux_arm64.tar.gz
+      sha256: "448745776e586d97f7afe2b4dab81a93e231a1324879df163d48172c3899ac95"
       files:
         - from: audit
           to: .
@@ -33,8 +33,8 @@ spec:
         matchLabels:
           os: darwin
           arch: amd64
-      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.4.0/audit_darwin_amd64.tar.gz
-      sha256: "93511151a39d1d12add8e648bf77939c92ab1964031657c3e9d785cd2611f365"
+      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.5.0/audit_darwin_amd64.tar.gz
+      sha256: "8faaf4ac6141fa23608cf819b686d770c1dcaef25f260045f39c7a0b6591fdd0"
       files:
         - from: audit
           to: .
@@ -45,8 +45,8 @@ spec:
         matchLabels:
           os: darwin
           arch: arm64
-      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.4.0/audit_darwin_arm64.tar.gz
-      sha256: "ce9e56bb77b4f249da3235141980d06be5a6efbfcccbe245f5eeb089b3ab45a7"
+      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.5.0/audit_darwin_arm64.tar.gz
+      sha256: "5e347acf5a3044ac59a2f28e341a0aba3b0df48d3186d833024603733a24476b"
       files:
         - from: audit
           to: .
@@ -57,8 +57,8 @@ spec:
         matchLabels:
           os: windows
           arch: amd64
-      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.4.0/audit_windows_amd64.zip
-      sha256: "d85a26f38772a27410d58bc2e98d134fc3129f8f749a7d5f7c117cedfef0c3e2"
+      uri: https://github.com/codenio/kubectl-audit/releases/download/v0.5.0/audit_windows_amd64.zip
+      sha256: "04181eee5db7fdd65d2d3de810b34854965515911393d142bf769a425e9cb86f"
       files:
         - from: audit.exe
           to: .
@@ -73,7 +73,7 @@ spec:
 
     For additional options:
       $ kubectl audit --help
-      or https://github.com/codenio/kubectl-audit/blob/v0.4.0/doc/USAGE.md
+      or https://github.com/codenio/kubectl-audit/blob/v0.5.0/doc/USAGE.md
 
   description: |
     Run quick Kubernetes resource audits for common operational issues, including
