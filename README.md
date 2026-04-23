@@ -4,9 +4,11 @@ Custom [Krew](https://krew.sigs.k8s.io/) plugin index for [codenio](https://gith
 
 ## Plugins
 
-| Plugin   | Description                      |
-| -------- | -------------------------------- |
-| `audit`  | [kubectl-audit](https://github.com/codenio/kubectl-audit) — resource health audits |
+
+| Plugin  | Description                                                                        |
+| ------- | ---------------------------------------------------------------------------------- |
+| `audit` | [kubectl-audit](https://github.com/codenio/kubectl-audit) — resource health audits |
+
 
 ## Use this index
 
@@ -27,7 +29,7 @@ kubectl krew install codenio-krew/audit
 Update the plugin later:
 
 ```bash
-kubectl krew upgrade codenio/audit
+kubectl krew upgrade audit
 ```
 
 ## Releasing a new `audit` version
