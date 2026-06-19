@@ -8,9 +8,6 @@ run-name: Sync audit (${{ github.event_name }})
 
 on:
   workflow_dispatch:
-  schedule:
-    # Weekly; increase frequency if you want faster picks of new releases
-    - cron: "17 6 * * 1"
 
 concurrency:
   group: sync-kubectl-audit
