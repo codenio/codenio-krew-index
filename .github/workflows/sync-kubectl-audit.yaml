@@ -1,13 +1,20 @@
 name: Sync kubectl-audit manifest
 
 # Index tracks only the latest kubectl-audit release (plugins/audit.yaml).
-# Manual runs: enable "Allow GitHub Actions" + open Actions → this workflow → "Run workflow".
-# No push trigger: the job commits to main under plugins/; that push would fire again (waste / concurrency noise).
+# Triggered by:
+#   - repository_dispatch from kubectl-audit release (event: sync-audit)
+#   - manual workflow_dispatch
+# No push trigger: this job commits to main; a push trigger would loop.
 
-run-name: Sync audit (${{ github.event_name }})
+run-name: >-
+  ${{ github.event_name == 'repository_dispatch'
+      && format('Sync audit · {0}', github.event.client_payload.version || 'release')
+      || format('Sync audit · {0}', github.event_name) }}
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [sync-audit]
 
 concurrency:
   group: sync-kubectl-audit
